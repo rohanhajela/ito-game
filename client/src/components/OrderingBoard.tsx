@@ -61,6 +61,13 @@ export const OrderingBoard: React.FC<OrderingBoardProps> = ({
     <div className="ordering-layout">
       <section className="your-number">
         <div className="your-number-card">
+          <div
+            className="your-avatar"
+            style={{ color: you.color }}
+          >
+            {you.icon}
+          </div>
+
           <div className="label">Your number</div>
           <div className="value">{yourNumber ?? '—'}</div>
         </div>
