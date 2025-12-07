@@ -1,0 +1,233 @@
+:root {
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(circle at top, #222 0, #050509 60%);
+  color: #fefefe;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.app-header {
+  flex: 0 0 12vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+.app-main {
+  flex: 1;
+  padding: 4px 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.app-footer {
+  flex: 0 0 14vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 12px 8px;
+}
+
+button {
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  background: #f5b041;
+  color: #111;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+input {
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.3);
+  color: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.landing {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+}
+
+.landing-title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.landing-card {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.landing-row {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.landing-row input {
+  flex: 1;
+}
+
+/* Orientation helper */
+
+.rotate-message {
+  display: none;
+  height: 100%;
+  width: 100%;
+  padding: 24px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+@media (orientation: portrait) {
+  .app-main,
+  .app-header,
+  .app-footer {
+    display: none;
+  }
+  .rotate-message {
+    display: flex;
+  }
+}
+
+/* Ordering layout */
+
+.ordering-layout {
+  display: flex;
+  flex: 1;
+  gap: 8px;
+}
+
+.your-number {
+  flex: 0 0 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.your-number-card {
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.your-number-card .label {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-bottom: 4px;
+}
+
+.your-number-card .value {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.ordering-strip {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.strip-scroll {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+  overflow-x: auto;
+  padding: 4px 2px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.player-card {
+  flex: 0 0 80px;
+  height: 120px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  text-align: center;
+}
+
+.player-card.dragging {
+  opacity: 0.6;
+  transform: scale(0.96);
+}
+
+.player-name {
+  margin-bottom: 6px;
+  padding: 0 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player-number {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.results-line {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-top: 4px;
+}
