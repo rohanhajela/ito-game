@@ -15,6 +15,8 @@ interface Player {
   number: number | null;
   connected: boolean;
   socketId: string;
+  color: string;
+  icon: string;
 }
 
 interface Room {
@@ -29,11 +31,43 @@ interface Room {
 
 const rooms = new Map<RoomCode, Room>();
 
+const PLAYER_COLORS = [
+  '#ff6b6b',
+  '#f7b731',
+  '#4cd964',
+  '#5ac8fa',
+  '#007aff',
+  '#af52de',
+  '#ff9f0a',
+  '#ff2d55',
+];
+
+const PLAYER_ICONS = ['♠️', '♥️', '♦️', '♣️', '⭐️', '🎵', '🍀', '🔥'];
+
+function assignColorAndIcon(room: Room): { color: string; icon: string } {
+  const usedPairs = new Set(room.players.map((p) => `${p.color}|${p.icon}`));
+
+  for (let i = 0; i < PLAYER_COLORS.length * PLAYER_ICONS.length; i++) {
+    const color = PLAYER_COLORS[i % PLAYER_COLORS.length];
+    const icon = PLAYER_ICONS[i % PLAYER_ICONS.length];
+    const key = `${color}|${icon}`;
+    if (!usedPairs.has(key)) {
+      return { color, icon };
+    }
+  }
+
+  // Fallback (should rarely happen): just random
+  const color =
+    PLAYER_COLORS[Math.floor(Math.random() * PLAYER_COLORS.length)];
+  const icon = PLAYER_ICONS[Math.floor(Math.random() * PLAYER_ICONS.length)];
+  return { color, icon };
+}
+
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: '*', // dev-friendly; tighten in prod
+    origin: '*',
   },
 });
 
@@ -71,6 +105,8 @@ function sanitizeRoomForClient(
       isHost: p.isHost,
       connected: p.connected,
       number: revealNumbers ? p.number : null,
+      color: p.color,
+      icon: p.icon,
     })),
   };
 }
@@ -101,6 +137,16 @@ io.on('connection', (socket) => {
     const code = generateRoomCode();
     const playerId = randomUUID();
 
+    const { color, icon } = assignColorAndIcon({
+      code,
+      hostId: playerId,
+      players: [],
+      phase: 'LOBBY',
+      currentOrder: [],
+      finalOrder: null,
+      createdAt: Date.now(),
+    });
+
     const host: Player = {
       id: playerId,
       name: name || 'Host',
@@ -108,6 +154,8 @@ io.on('connection', (socket) => {
       number: null,
       connected: true,
       socketId: socket.id,
+      color,
+      icon,
     };
 
     const room: Room = {
@@ -134,6 +182,8 @@ io.on('connection', (socket) => {
     }
 
     const playerId = randomUUID();
+    const { color, icon } = assignColorAndIcon(room);
+
     const player: Player = {
       id: playerId,
       name: name || 'Player',
@@ -141,6 +191,8 @@ io.on('connection', (socket) => {
       number: null,
       connected: true,
       socketId: socket.id,
+      color,
+      icon,
     };
 
     room.players.push(player);
@@ -223,7 +275,7 @@ io.on('connection', (socket) => {
   });
 });
 
-// ---- Static serving for prod (optional, once client is built) ----
+// ---- Static serving for prod ----
 const clientDist = path.join(__dirname, '..', '..', 'client', 'dist');
 app.use(express.static(clientDist));
 

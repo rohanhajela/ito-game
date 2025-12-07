@@ -6,6 +6,8 @@ export interface Player {
   isHost: boolean;
   connected: boolean;
   number: number | null;
+  color: string;
+  icon: string;
 }
 
 export interface Room {
@@ -15,7 +17,6 @@ export interface Room {
   phase: Phase;
   currentOrder: string[];
   finalOrder: string[] | null;
-  // server may send extra fields; that's fine
 }
 
 export type You = Player;

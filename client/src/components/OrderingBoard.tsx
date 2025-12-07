@@ -86,6 +86,8 @@ export const OrderingBoard: React.FC<OrderingBoardProps> = ({
                     id={p.id}
                     name={p.name}
                     number={p.number}
+                    color={p.color}
+                    icon={p.icon}
                     draggable={canDrag}
                   />
                 );
@@ -102,6 +104,8 @@ interface SortablePlayerCardProps {
   id: string;
   name: string;
   number: number | null;
+  color: string;
+  icon: string;
   draggable: boolean;
 }
 
@@ -109,6 +113,8 @@ const SortablePlayerCard: React.FC<SortablePlayerCardProps> = ({
   id,
   name,
   number,
+  color,
+  icon,
   draggable,
 }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
@@ -130,6 +136,9 @@ const SortablePlayerCard: React.FC<SortablePlayerCardProps> = ({
       {...attributes}
       {...listeners}
     >
+      <div className="player-avatar" style={{ color }}>
+        <span className="player-icon">{icon}</span>
+      </div>
       <div className="player-name">{name}</div>
       {number != null && <div className="player-number">{number}</div>}
     </div>
