@@ -16,7 +16,7 @@ body,
   width: 100%;
   height: 100%;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: radial-gradient(circle at top, #222 0, #050509 60%);
+  background: radial-gradient(circle at top, #1e1f25 0, #050509 60%);
   color: #fefefe;
 }
 
@@ -26,6 +26,141 @@ body,
   height: 100vh;
   width: 100vw;
 }
+
+/* ------------ Landing screen ------------ */
+
+.landing {
+  height: 100%;
+  width: 100%;
+  padding: 16px 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.landing-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.landing-title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.landing-subtitle {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+.landing-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.landing-footer {
+  flex: 0 0 auto;
+  font-size: 11px;
+  opacity: 0.5;
+}
+
+/* Cards */
+
+.landing-card {
+  background: radial-gradient(circle at top left, #23242e 0, #15161d 50%);
+  border-radius: 18px;
+  padding: 12px 14px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.landing-name-card {
+  max-width: 520px;
+}
+
+.landing-label {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-bottom: 2px;
+}
+
+/* Layout for Create / Join row */
+
+.landing-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.landing-action-card {
+  flex: 1;
+}
+
+.landing-row {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.landing-row input {
+  flex: 1;
+}
+
+/* Buttons & inputs */
+
+button {
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.primary-button {
+  width: 100%;
+  background: linear-gradient(135deg, #ffb347, #ffcc33);
+  color: #111;
+}
+
+.secondary-button {
+  background: transparent;
+  color: #fefefe;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding-inline: 14px;
+}
+
+input {
+  padding: 9px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.35);
+  color: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ------------ Game layout ------------ */
 
 .app-header {
   flex: 0 0 12vh;
@@ -53,69 +188,6 @@ body,
   padding: 0 12px 8px;
 }
 
-button {
-  min-height: 40px;
-  padding: 8px 16px;
-  border-radius: 999px;
-  border: none;
-  font-size: 14px;
-  font-weight: 500;
-  background: #f5b041;
-  color: #111;
-  cursor: pointer;
-}
-
-button:disabled {
-  opacity: 0.4;
-  cursor: default;
-}
-
-input {
-  padding: 8px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(0, 0, 0, 0.3);
-  color: inherit;
-  font-size: 14px;
-  outline: none;
-}
-
-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.landing {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-  gap: 16px;
-}
-
-.landing-title {
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.landing-card {
-  background: rgba(0, 0, 0, 0.35);
-  border-radius: 16px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.landing-row {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-}
-
-.landing-row input {
-  flex: 1;
-}
-
 /* Orientation helper */
 
 .rotate-message {
@@ -139,7 +211,7 @@ input::placeholder {
   }
 }
 
-/* Ordering layout */
+/* ------------ Ordering layout ------------ */
 
 .ordering-layout {
   display: flex;
